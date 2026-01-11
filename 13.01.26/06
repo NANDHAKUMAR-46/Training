@@ -1,0 +1,18 @@
+def up(g):
+    n,m=len(g),len(g[0])
+    c=0
+    for i in range(n):
+        for j in range(m):
+            if g[i][j]==1:sx,sy=i,j
+            if g[i][j]==0:c+=1
+    def dfs(x,y,z):
+        if g[x][y]==2:return z==c+1
+        t=g[x][y];g[x][y]=-1
+        r=0
+        for dx,dy in [(1,0),(-1,0),(0,1),(0,-1)]:
+            nx,ny=x+dx,y+dy
+            if 0<=nx<n and 0<=ny<m and g[nx][ny]!=-1:
+                r+=dfs(nx,ny,z+1)
+        g[x][y]=t
+        return r
+    return dfs(sx,sy,0)
