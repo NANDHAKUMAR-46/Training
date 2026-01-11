@@ -1,0 +1,19 @@
+import heapq
+n,m=map(int,input().split())
+g=[list(map(int,input().split())) for _ in range(n)]
+sx,sy,ex,ey=map(int,input().split())
+pq=[(0,sx,sy)]
+dist={(sx,sy):0}
+while pq:
+    d,x,y=heapq.heappop(pq)
+    if (x,y)==(ex,ey):
+        print(d)
+        break
+    for dx,dy in [(1,0),(-1,0),(0,1),(0,-1)]:
+        nx,ny=x+dx,y+dy
+        if 0<=nx<n and 0<=ny<m:
+            nd=d+g[nx][ny]
+            if (nx,ny) not in dist or nd<dist[(nx,ny)]:
+                dist[(nx,ny)]=nd
+                h=abs(nx-ex)+abs(ny-ey)
+                heapq.heappush(pq,(nd+h,nx,ny))
