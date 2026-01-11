@@ -1,0 +1,20 @@
+class SA:
+    def __init__(s):
+        s.n=[{}];s.l=[0];s.link=[-1];s.last=0
+    def add(s,c):
+        cur=len(s.n)
+        s.n.append({});s.l.append(s.l[s.last]+1);s.link.append(0)
+        p=s.last
+        while p!=-1 and c not in s.n[p]:
+            s.n[p][c]=cur;p=s.link[p]
+        if p==-1:s.link[cur]=0
+        else:
+            q=s.n[p][c]
+            if s.l[p]+1==s.l[q]:s.link[cur]=q
+            else:
+                clone=len(s.n)
+                s.n.append(s.n[q].copy());s.l.append(s.l[p]+1);s.link.append(s.link[q])
+                while p!=-1 and s.n[p].get(c)==q:
+                    s.n[p][c]=clone;p=s.link[p]
+                s.link[q]=s.link[cur]=clone
+        s.last=cur
