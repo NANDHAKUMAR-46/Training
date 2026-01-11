@@ -1,0 +1,9 @@
+a=list(map(int,input().split()))
+j=0
+cur=far=0
+for i in range(len(a)-1):
+    far=max(far,i+a[i])
+    if i==cur:
+        j+=1
+        cur=far
+print(j)
