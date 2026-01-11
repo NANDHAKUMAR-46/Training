@@ -1,0 +1,8 @@
+def zig(r):
+    q=[r];res=[];f=0
+    while q:
+        t=[n.val for n in q]
+        res.append(t[::-1] if f else t)
+        f^=1
+        q=[c for n in q for c in (n.left,n.right) if c]
+    return res
