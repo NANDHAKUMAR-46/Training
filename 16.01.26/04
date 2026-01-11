@@ -1,0 +1,24 @@
+n,e=map(int,input().split())
+g=[[] for _ in range(n)]
+for _ in range(e):
+    u,v=map(int,input().split())
+    g[u].append(v);g[v].append(u)
+t=0;disc=[-1]*n;low=[0]*n;st=[]
+def dfs(u,p):
+    global t
+    disc[u]=low[u]=t;t+=1
+    for v in g[u]:
+        if disc[v]==-1:
+            st.append((u,v))
+            dfs(v,u)
+            low[u]=min(low[u],low[v])
+            if low[v]>=disc[u]:
+                comp=[]
+                while st[-1]!=(u,v):
+                    comp.append(st.pop())
+                comp.append(st.pop())
+                print(comp)
+        elif v!=p and disc[v]<disc[u]:
+            low[u]=min(low[u],disc[v])
+            st.append((u,v))
+dfs(0,-1)
