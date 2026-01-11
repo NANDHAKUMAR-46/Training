@@ -1,0 +1,24 @@
+from collections import defaultdict,OrderedDict
+class LFU:
+    def __init__(s,c):
+        s.c=c;s.minf=0
+        s.kf={};s.fk=defaultdict(OrderedDict)
+    def get(s,k):
+        if k not in s.kf:return -1
+        v,f=s.kf[k]
+        del s.fk[f][k]
+        if not s.fk[f] and f==s.minf:s.minf+=1
+        s.fk[f+1][k]=v
+        s.kf[k]=(v,f+1)
+        return v
+    def put(s,k,v):
+        if s.c==0:return
+        if k in s.kf:
+            s.kf[k]=(v,s.kf[k][1])
+            s.get(k);return
+        if len(s.kf)==s.c:
+            x,_=s.fk[s.minf].popitem(last=False)
+            del s.kf[x]
+        s.fk[1][k]=v
+        s.kf[k]=(v,1)
+        s.minf=1
