@@ -1,0 +1,30 @@
+from collections import deque
+n,e=map(int,input().split())
+g=[[0]*n for _ in range(n)]
+for _ in range(e):
+    u,v,c=map(int,input().split())
+    g[u][v]+=c
+s,t=map(int,input().split())
+f=0
+while True:
+    p=[-1]*n;p[s]=s
+    q=deque([s])
+    while q and p[t]==-1:
+        u=q.popleft()
+        for v in range(n):
+            if p[v]==-1 and g[u][v]>0:
+                p[v]=u;q.append(v)
+    if p[t]==-1:break
+    v=t;mn=10**18
+    while v!=s:
+        u=p[v]
+        mn=min(mn,g[u][v])
+        v=u
+    v=t
+    while v!=s:
+        u=p[v]
+        g[u][v]-=mn
+        g[v][u]+=mn
+        v=u
+    f+=mn
+print(f)
