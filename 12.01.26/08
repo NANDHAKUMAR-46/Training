@@ -1,0 +1,15 @@
+m=[list(map(int,input().split())) for _ in range(int(input()))]
+h=[0]*len(m[0])
+ans=0
+for r in m:
+    for i in range(len(r)):
+        h[i]=h[i]+1 if r[i] else 0
+    st=[]
+    for i in range(len(h)+1):
+        cur=h[i] if i<len(h) else 0
+        while st and cur<h[st[-1]]:
+            x=h[st.pop()]
+            w=i if not st else i-st[-1]-1
+            ans=max(ans,x*w)
+        st.append(i)
+print(ans)
