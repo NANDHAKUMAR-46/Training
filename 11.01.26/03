@@ -1,0 +1,14 @@
+n=int(input())
+g=[list(map(int,input().split())) for _ in range(n)]
+path=[0]
+def dfs(u):
+    if len(path)==n:
+        print(path)
+        return True
+    for v in range(n):
+        if g[u][v] and v not in path:
+            path.append(v)
+            if dfs(v):return True
+            path.pop()
+    return False
+dfs(0)
