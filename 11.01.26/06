@@ -1,0 +1,9 @@
+c=list(map(int,input().split()))
+a=int(input())
+dp=[10**9]*(a+1)
+dp[0]=0
+for i in range(1,a+1):
+    for x in c:
+        if i>=x:
+            dp[i]=min(dp[i],dp[i-x]+1)
+print(dp[a])
