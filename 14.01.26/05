@@ -1,0 +1,8 @@
+a=list(map(int,input().split()))
+st=[]
+res=[]
+for i,x in enumerate(a):
+    while st and a[st[-1]]<=x:st.pop()
+    res.append(i+1 if not st else i-st[-1])
+    st.append(i)
+print(res)
