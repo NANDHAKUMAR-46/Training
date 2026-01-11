@@ -1,0 +1,10 @@
+import heapq
+l=[];r=[]
+while True:
+    try:
+        x=int(input())
+        heapq.heappush(l,-x)
+        heapq.heappush(r,-heapq.heappop(l))
+        if len(r)>len(l):heapq.heappush(l,-heapq.heappop(r))
+        print(-l[0])
+    except:break
