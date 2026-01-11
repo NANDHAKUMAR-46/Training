@@ -1,0 +1,10 @@
+n=int(input())
+u=[1]
+i=j=k=0
+for _ in range(n-1):
+    m=min(2*u[i],3*u[j],5*u[k])
+    u.append(m)
+    if m==2*u[i]:i+=1
+    if m==3*u[j]:j+=1
+    if m==5*u[k]:k+=1
+print(u[-1])
