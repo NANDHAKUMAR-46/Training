@@ -1,0 +1,11 @@
+class N:
+    def __init__(s):s.l=s.r=s.u=s.d=s
+def cover(c):
+    c.r.l=c.l;c.l.r=c.r
+    i=c.d
+    while i!=c:
+        j=i.r
+        while j!=i:
+            j.d.u=j.u;j.u.d=j.d
+            j=j.r
+        i=i.d
