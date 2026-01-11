@@ -1,8 +1,0 @@
-ans=0
-def dia(r):
-    global ans
-    if not r:return 0
-    l=dia(r.left)
-    h=dia(r.right)
-    ans=max(ans,l+h)
-    return max(l,h)+1
