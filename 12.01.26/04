@@ -1,0 +1,14 @@
+class N:
+    def __init__(s,v):s.v=v;s.n=None
+def rot(h,k):
+    if not h:return h
+    c=1;t=h
+    while t.n:
+        t=t.n;c+=1
+    t.n=h
+    k%=c
+    for _ in range(c-k):
+        t=t.n
+    nh=t.n
+    t.n=None
+    return nh
