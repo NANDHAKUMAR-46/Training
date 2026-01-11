@@ -1,0 +1,9 @@
+def reorder(h):
+    s=[];t=h
+    while t:s.append(t);t=t.n
+    i=0;j=len(s)-1
+    while i<j:
+        s[i].n=s[j];i+=1
+        if i==j:break
+        s[j].n=s[i];j-=1
+    s[i].n=None
