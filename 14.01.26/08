@@ -1,0 +1,8 @@
+a=input();b=input();c=input()
+dp=[[0]*(len(b)+1) for _ in range(len(a)+1)]
+dp[0][0]=1
+for i in range(len(a)+1):
+    for j in range(len(b)+1):
+        if i and a[i-1]==c[i+j-1]:dp[i][j]|=dp[i-1][j]
+        if j and b[j-1]==c[i+j-1]:dp[i][j]|=dp[i][j-1]
+print(dp[-1][-1])
