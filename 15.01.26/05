@@ -1,0 +1,31 @@
+from collections import deque
+n,e=map(int,input().split())
+g=[[] for _ in range(n)]
+for _ in range(e):
+    u,v,c,w=map(int,input().split())
+    g[u].append([v,c,w,len(g[v])])
+    g[v].append([u,0,-w,len(g[u])-1])
+s,t=map(int,input().split())
+flow=cost=0
+while True:
+    d=[10**18]*n;p=[(-1,-1)]*n;d[s]=0
+    inq=[0]*n;q=deque([s])
+    while q:
+        u=q.popleft();inq[u]=0
+        for i,(v,c,w,_) in enumerate(g[u]):
+            if c and d[u]+w<d[v]:
+                d[v]=d[u]+w;p[v]=(u,i)
+                if not inq[v]:inq[v]=1;q.append(v)
+    if d[t]==10**18:break
+    v=t;f=10**18
+    while v!=s:
+        u,i=p[v];f=min(f,g[u][i][1]);v=u
+    v=t
+    while v!=s:
+        u,i=p[v]
+        g[u][i][1]-=f
+        g[v][g[u][i][3]][1]+=f
+        cost+=f*g[u][i][2]
+        v=u
+    flow+=f
+print(flow,cost)
