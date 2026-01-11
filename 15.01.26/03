@@ -1,0 +1,17 @@
+import heapq
+b=[]
+for _ in range(int(input())):
+    l,r,h=map(int,input().split())
+    b.append((l,-h,r))
+    b.append((r,0,0))
+b.sort()
+res=[]
+pq=[(0,10**18)]
+for x,h,r in b:
+    while pq[0][1]<=x:
+        heapq.heappop(pq)
+    if h:
+        heapq.heappush(pq,(h,r))
+    if res and res[-1][1]==-pq[0][0]:continue
+    res.append((x,-pq[0][0]))
+print(res)
