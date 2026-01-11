@@ -1,0 +1,9 @@
+import heapq
+n=int(input())
+pts=[tuple(map(int,input().split())) for _ in range(n)]
+k=int(input())
+h=[]
+for x,y in pts:
+    heapq.heappush(h,(x*x+y*y,x,y))
+for _ in range(k):
+    print(heapq.heappop(h)[1:])
