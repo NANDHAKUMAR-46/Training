@@ -1,0 +1,11 @@
+s=input()
+n=len(s)
+dp=list(range(n))
+for i in range(n):
+    l=r=i
+    while l>=0 and r<n and s[l]==s[r]:
+        dp[r]=min(dp[r],dp[l-1]+1 if l else 0);l-=1;r+=1
+    l=i;r=i+1
+    while l>=0 and r<n and s[l]==s[r]:
+        dp[r]=min(dp[r],dp[l-1]+1 if l else 0);l-=1;r+=1
+print(dp[-1])
